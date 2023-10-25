@@ -3,6 +3,7 @@ using System;
 using FlightsApp.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -11,9 +12,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace FlightsApp.Migrations
 {
     [DbContext(typeof(FlightsAppDbContext))]
-    partial class FlightsAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231025063045_Added_Passengers_Table")]
+    partial class AddedPassengersTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
