@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FlightsApp.Airports;
+using FlightsApp.Flights;
 using FlightsApp.Passengers;
 
 namespace FlightsApp;
@@ -19,5 +20,9 @@ public class FlightsAppApplicationAutoMapperProfile : Profile
          CreateMap<Passenger, PassengerDto>();
          CreateMap<CreatePassengerDto, Passenger>();
          CreateMap<UpdatePassengerDto, Passenger>();
+
+         CreateMap<Flight, FlightDto>();
+         CreateMap<CreateFlightDto, Flight>();
+         CreateMap<UpdateFlightDto, Flight>();
     }
 }

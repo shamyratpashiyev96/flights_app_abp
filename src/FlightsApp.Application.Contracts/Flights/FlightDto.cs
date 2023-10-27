@@ -1,25 +1,22 @@
-using System.Reflection.Metadata.Ecma335;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using FlightsApp.Airports;
-using Volo.Abp.Domain.Entities.Auditing;
-using System;
+using Volo.Abp.Application.Dtos;
 
 namespace FlightsApp.Flights
 {
-    public class Flight : AuditedAggregateRoot<int>
+    public class FlightDto : AuditedEntityDto<int>
     {
-        [Key]
         public int Id { get; set; }
         [Required]
         public int OriginId { get; set; }
-        [ForeignKey("OriginId")]
-        public Airport Origin { get; set; }
+
+        public AirportDto Origin { get; set; }
 
         [Required]
         public int DestinationId { get; set; }
-        [ForeignKey("DestinationId")]
-        public Airport Destination { get; set; }
+        public AirportDto Destination { get; set; }
 
         [Required]
         public DateTime DepartureDate { get; set; }
