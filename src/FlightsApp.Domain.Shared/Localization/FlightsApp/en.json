@@ -13,6 +13,13 @@
     "Menu:Passengers" : "The Passengers",
     "NewPassenger" : "New Passenger",
     "firstName" : "Passenger Firstname",
-    "lastName" : "Passenger Lastname"
+    "lastName" : "Passenger Lastname",
+    "Menu:Flights": "The Flights",
+    "NewFlight" : "Add New Flight",
+    "Origin" : "Origin City",
+    "Destination" : "Destination City",
+    "DepartureDate" : "Departure Time",
+    "ArrivalDate" : "Arrival Time",
+    "AreYouSureToDelete" : "Are you sure you want to delete this item?"
   }
 }

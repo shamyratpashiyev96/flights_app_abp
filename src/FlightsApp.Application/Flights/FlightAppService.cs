@@ -71,7 +71,7 @@ namespace FlightsApp.Flights
                 on flight.DestinationId equals destination.Id
                 select new { flight, origin, destination };
 
-            query
+            query = query
                 .OrderBy(NormalizeSorting(input.Sorting))
                 .Skip(input.SkipCount)
                 .Take(input.MaxResultCount);
@@ -98,6 +98,22 @@ namespace FlightsApp.Flights
             if(sorting.IsNullOrEmpty())
             {
                 return $"flight.{nameof(Flight.ArrivalDate)}";
+            }
+
+            if(sorting.Contains("arrivalDate", StringComparison.OrdinalIgnoreCase))
+            {
+                return sorting.Replace(
+                    "arrivalDate",
+                    "flight.arrivalDate",
+                    StringComparison.OrdinalIgnoreCase);
+            } 
+            else if(sorting.Contains("departureDate",StringComparison.OrdinalIgnoreCase))
+            {
+                return sorting.Replace(
+                    "departureDate",
+                    "flight.departureDate",
+                    StringComparison.OrdinalIgnoreCase
+                );
             }
             
             return sorting;
