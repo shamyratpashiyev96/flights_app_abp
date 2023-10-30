@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using FlightsApp.Airports;
 using Volo.Abp.Domain.Entities.Auditing;
 using System;
+using System.Collections.Generic;
+using FlightsApp.Passengers;
 
 namespace FlightsApp.Flights
 {
@@ -25,5 +27,7 @@ namespace FlightsApp.Flights
         public DateTime DepartureDate { get; set; }
         [Required]
         public DateTime ArrivalDate { get; set; }
+
+        public List<Passenger> Passengers { get; set; }
     }
 }

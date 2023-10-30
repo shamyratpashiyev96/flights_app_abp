@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using FlightsApp.Flights;
 using Volo.Abp.Domain.Entities.Auditing;
 
 namespace FlightsApp.Passengers
@@ -13,5 +15,7 @@ namespace FlightsApp.Passengers
         [Required]
         [Column(TypeName = "VARCHAR(500)")]
         public string LastName { get; set; }
+
+        public List<Flight> Flights { get; set; }
     }
 }

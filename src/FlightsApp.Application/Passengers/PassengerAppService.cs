@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
@@ -12,8 +15,17 @@ namespace FlightsApp.Passengers
         CreatePassengerDto,
         UpdatePassengerDto>
     {
-        public PassengerAppService(IRepository<Passenger, int> repository) : base(repository)
+        private readonly IPassengerRepository passengerRepo;
+        public PassengerAppService(IPassengerRepository repository) : base(repository)
         {
+            passengerRepo = repository;
+        }
+
+        public async Task<List<PassengerDto>> GetWithFlights()
+        {
+            var passengers = await passengerRepo.GetWithFlights();
+            var result = ObjectMapper.Map<List<Passenger>, List<PassengerDto>>(passengers);
+            return result;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using FlightsApp.Airports;
 using FlightsApp.Flights;
+using FlightsApp.FlightsPassengers;
 using FlightsApp.Passengers;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
@@ -60,6 +61,7 @@ public class FlightsAppDbContext :
     public DbSet<Airport> Airports { get; set; }
     public DbSet<Passenger> Passengers { get; set; }
     public DbSet<Flight> Flights { get; set; }
+    public DbSet<FlightPassengerPivot> FlightsPassengersPivot { get; set; }
 
     public FlightsAppDbContext(DbContextOptions<FlightsAppDbContext> options)
         : base(options)
@@ -97,6 +99,7 @@ public class FlightsAppDbContext :
            b.ToTable(FlightsAppConsts.DbTablePrefix + "Passengers", FlightsAppConsts.DbSchema);
            b.ConfigureByConvention(); //auto configure for the base class props
 
+           b.HasMany(p => p.Flights).WithMany(f => f.Passengers).UsingEntity<FlightPassengerPivot>();
         });
 
         builder.Entity<Flight>(b =>
@@ -105,6 +108,14 @@ public class FlightsAppDbContext :
            b.ConfigureByConvention(); //auto configure for the base class props
            b.HasOne(flight => flight.Origin).WithMany(airport => airport.Departures).HasForeignKey(flight => flight.OriginId).OnDelete(DeleteBehavior.Cascade);
            b.HasOne(flight => flight.Destination).WithMany(airport => airport.Arrivals).HasForeignKey(flight => flight.DestinationId).OnDelete(DeleteBehavior.Cascade);
+           b.HasMany(f => f.Passengers).WithMany(p => p.Flights).UsingEntity<FlightPassengerPivot>();
+        });
+
+         builder.Entity<FlightPassengerPivot>(b =>
+        {
+           b.ToTable(FlightsAppConsts.DbTablePrefix + "FlightsPassengersPivot", FlightsAppConsts.DbSchema);
+           b.ConfigureByConvention(); //auto configure for the base class props
+
         });
     }
 }
